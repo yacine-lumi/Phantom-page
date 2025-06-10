@@ -99,54 +99,10 @@
       letter-spacing: 1px;
     }
     
-    /* الهيرو */
-    .hero {
-      max-width: 1200px;
-      margin: 80px auto 60px;
-      padding: 0 20px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      background: linear-gradient(to right, var(--secondary), var(--primary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-      letter-spacing: 1px;
-      line-height: 1.2;
-    }
-    
-    .hero p {
-      font-size: 1.6rem;
-      color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto 40px;
-      line-height: 1.5;
-    }
-    
-    .hero-image {
-      max-width: 800px;
-      margin: 40px auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      position: relative;
-      border: 1px solid rgba(138, 43, 226, 0.3);
-    }
-    
-    .hero-image img {
-      width: 100%;
-      display: block;
-    }
-    
-    /* مكونات المنتج */
+    /* مكونات المنتج - الآن في الأعلى */
     .components {
       max-width: 1200px;
-      margin: 80px auto;
+      margin: 80px auto 60px;
       padding: 0 20px;
     }
     
@@ -228,6 +184,50 @@
       border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 600;
+    }
+    
+    /* الهيرو - الآن في الأسفل مع الصورة في الأسفل */
+    .hero {
+      max-width: 1200px;
+      margin: 40px auto 100px;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.6rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+    
+    .hero-image {
+      max-width: 800px;
+      margin: 40px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      border: 1px solid rgba(138, 43, 226, 0.3);
+    }
+    
+    .hero-image img {
+      width: 100%;
+      display: block;
     }
     
     /* لماذا تختار Phantom Engine */
@@ -477,15 +477,7 @@
     </div>
   </nav>
   
-  <section class="hero">
-    <h1>Phantom Engine <span style="color: var(--secondary);">v1.2</span></h1>
-    <p>Automatisation Totale, Invisibilité Assurée, Performances Inégalées</p>
-    
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Phantom Engine Interface">
-    </div>
-  </section>
-  
+  <!-- Boîte à Outils Complète في الأعلى -->
   <section class="components">
     <h2 class="section-title">Votre Boîte à Outils Complète</h2>
     
@@ -561,6 +553,16 @@
         <div class="component-badge">TXT</div>
         <p class="component-desc">Accès à des mises à jour, bonus exclusifs et offres spéciales.</p>
       </div>
+    </div>
+  </section>
+  
+  <!-- الهيرو الآن في الأسفل مع الصورة في الأسفل -->
+  <section class="hero">
+    <h1>Phantom Engine <span style="color: var(--secondary);">v1.2</span></h1>
+    <p>Automatisation Totale, Invisibilité Assurée, Performances Inégalées</p>
+    
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Phantom Engine Interface">
     </div>
   </section>
   
