@@ -1,17 +1,495 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Phantom Engine v1.0</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phantom Engine v1.0 - Automatisation Totale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" as="image">
+  <style>
+    :root {
+      --primary: #ff0080;
+      --primary-dark: #d8006d;
+      --secondary: #00eeff;
+      --dark-bg: #0a0a0a;
+      --dark-bg-light: #1a1a1a;
+      --text: #f0f0f0;
+      --text-secondary: #aaa;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    /* خلفية متحركة */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 0, 128, 0.2);
+      box-shadow: 0 0 10px var(--primary);
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 2;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .logo-icon {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      text-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255, 0, 128, 0.2);
+      letter-spacing: 1px;
+    }
+    
+    .tagline {
+      font-size: 1.4rem;
+      margin-top: 0.5em;
+      color: var(--text-secondary);
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 40px 0;
+      max-width: 1000px;
+    }
+    
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      width: 280px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(255, 0, 128, 0.2);
+      border: 1px solid rgba(255, 0, 128, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+    
+    .feature-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    
+    .feature-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+    
+    .banner {
+      width: 100%;
+      max-width: 900px;
+      height: 350px;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border-radius: 15px;
+      box-shadow: 0 0 40px rgba(255, 0, 255, 0.3);
+      margin: 30px 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .banner-content {
+      padding: 30px;
+      text-align: center;
+      z-index: 2;
+    }
+    
+    .banner h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    .banner p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+    }
+    
+    .btn-buy {
+      margin-top: 20px;
+      padding: 18px 50px;
+      font-size: 1.3rem;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, var(--primary), #cc00ff);
+      border: none;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-buy:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.6);
+    }
+    
+    .btn-buy:after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20px;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(30deg);
+      transition: all 0.8s;
+    }
+    
+    .btn-buy:hover:after {
+      left: 120%;
+    }
+    
+    #secret-msg {
+      margin-top: 40px;
+      color: var(--secondary);
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .secret-loader {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0, 238, 255, 0.3);
+      border-top: 3px solid var(--secondary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      width: 100%;
+      max-width: 900px;
+    }
+    
+    /* استجابة للجوال */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .banner {
+        height: 250px;
+      }
+      
+      .banner h2 {
+        font-size: 1.8rem;
+      }
+      
+      .banner p {
+        font-size: 1rem;
+      }
+      
+      .btn-buy {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+      }
+      
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .feature-card {
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+      }
+      
+      .banner {
+        height: 200px;
+      }
+      
+      .banner h2 {
+        font-size: 1.5rem;
+      }
+      
+      .logo-icon {
+        font-size: 2rem;
+      }
+      
+      .btn-buy {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Phantom Engine v1.0</h1>
-        <p>Le système invisible pour gagner en ligne — avec intelligence et anonymat.</p>
-        <a href="https://yacinet4.gumroad.com/l/phantomengine" class="btn">Acheter Maintenant</a>
+  <div class="particles" id="particles"></div>
+  
+  <div class="container">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-ghost"></i>
+      </div>
+      <h1>Phantom Engine v1.0</h1>
     </div>
-    <script src="script.js"></script>
+    
+    <p class="tagline">Automatisation Totale. Invisibilité Assurée. Performances Inégalées.</p>
+    
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-user-secret"></i>
+        </div>
+        <h3 class="feature-title">Invisibilité Totale</h3>
+        <p class="feature-desc">Opérez sans laisser de traces. Aucune empreinte numérique détectable par les systèmes de sécurité.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3 class="feature-title">Vitesse Extrême</h3>
+        <p class="feature-desc">Exécution des tâches 10x plus rapide que les solutions concurrentes avec une précision inégalée.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3 class="feature-title">Automatisation Intelligente</h3>
+        <p class="feature-desc">Des scripts auto-adaptatifs qui apprennent et s'optimisent avec chaque exécution.</p>
+      </div>
+    </div>
+    
+    <div class="banner">
+      <div class="banner-content">
+        <h2>L'outil ultime pour les opérations discrètes</h2>
+        <p>Conçu pour les professionnels exigeant une solution fiable, rapide et indétectable pour leurs opérations sensibles.</p>
+      </div>
+    </div>
+    
+    <button class="btn-buy" onclick="location.href='https://yacinet4.gumroad.com/l/phantom-engine-v1'">
+      <i class="fas fa-ghost"></i> Acheter Maintenant
+    </button>
+    
+    <p id="secret-msg">
+      <span class="secret-loader"></span>
+      <span class="secret-text">Tu es prêt. Active-le maintenant.</span>
+    </p>
+    
+    <div class="footer">
+      <p>Produit Interdit aux Robots. Réservé aux Phantoms. &copy; 2023 Phantom Technologies</p>
+      <p style="margin-top: 10px; font-size: 0.8rem;">
+        <i class="fas fa-shield-alt"></i> Toutes les transactions sont cryptées et sécurisées
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // إنشاء الجسيمات المتحركة
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // أحجام وألوان عشوائية
+        const size = Math.random() * 20 + 5;
+        const opacity = Math.random() * 0.3 + 0.1;
+        const delay = Math.random() * 15;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.opacity = opacity;
+        
+        container.appendChild(particle);
+      }
+    }
+    
+    // إظهار الرسالة السرية
+    function showSecretMessage() {
+      const secretMsg = document.getElementById('secret-msg');
+      const loader = document.querySelector('.secret-loader');
+      
+      // إظهار المحمل أولاً
+      loader.style.opacity = 1;
+      
+      // بعد 2 ثانية، إظهار الرسالة
+      setTimeout(() => {
+        secretMsg.style.opacity = 1;
+        loader.style.opacity = 0;
+        
+        // إضافة تأثير تحريك للرسالة
+        secretMsg.animate([
+          { transform: 'translateY(20px)', opacity: 0 },
+          { transform: 'translateY(0)', opacity: 1 }
+        ], {
+          duration: 1000,
+          easing: 'ease-out'
+        });
+      }, 2000);
+    }
+    
+    // إضافة تأثير اللمعان عند التمرير فوق زر الشراء
+    document.querySelector('.btn-buy').addEventListener('mouseenter', function() {
+      this.classList.add('shine');
+    });
+    
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // تأخير إظهار الرسالة السرية
+      setTimeout(showSecretMessage, 5000);
+      
+      // إضافة تأثير عند التمرير للبطاقات
+      const featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-10px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
