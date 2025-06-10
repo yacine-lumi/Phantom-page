@@ -145,6 +145,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
     
     .component-card:hover {
@@ -463,6 +464,165 @@
         font-size: 1rem;
       }
     }
+    
+    /* نماذج المحتوى التفاعلي */
+    .content-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    
+    .content-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+      border-radius: 15px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 50px rgba(138, 43, 226, 0.5);
+      transform: translateY(50px);
+      transition: transform 0.5s ease;
+    }
+    
+    .content-modal.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    }
+    
+    .modal-title {
+      font-size: 2rem;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .modal-icon {
+      font-size: 1.8rem;
+    }
+    
+    .close-modal {
+      background: var(--accent);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .close-modal:hover {
+      transform: rotate(90deg);
+      background: #ff0066;
+    }
+    
+    .modal-body {
+      padding: 20px 0;
+    }
+    
+    .modal-section {
+      margin-bottom: 30px;
+    }
+    
+    .modal-section h3 {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    }
+    
+    .modal-section p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 15px;
+      color: var(--text-secondary);
+    }
+    
+    .modal-section ul {
+      padding-left: 25px;
+      margin-bottom: 20px;
+    }
+    
+    .modal-section li {
+      margin-bottom: 10px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .modal-section li strong {
+      color: var(--secondary);
+    }
+    
+    .content-highlight {
+      background: rgba(138, 43, 226, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+    
+    .content-highlight p {
+      color: var(--text);
+      font-style: italic;
+      margin: 0;
+    }
+    
+    .code-block {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      color: var(--text);
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    
+    .file-structure {
+      background: rgba(30, 30, 30, 0.6);
+      padding: 20px;
+      border-radius: 8px;
+      font-family: monospace;
+      color: var(--text);
+      margin: 20px 0;
+    }
+    
+    .file-structure div {
+      padding-left: 20px;
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
@@ -482,7 +642,8 @@
     <h2 class="section-title">Votre Boîte à Outils Complète</h2>
     
     <div class="components-grid">
-      <div class="component-card">
+      <!-- Guide Ultime -->
+      <div class="component-card" data-target="guide">
         <div class="component-icon">
           <i class="fas fa-book"></i>
         </div>
@@ -491,7 +652,8 @@
         <p class="component-desc">Un PDF de 22 pages révélant des secrets exclusifs pour automatiser vos campagnes et booster votre productivité.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Planificateur Notion -->
+      <div class="component-card" data-target="notion">
         <div class="component-icon">
           <i class="fas fa-calendar-alt"></i>
         </div>
@@ -500,7 +662,8 @@
         <p class="component-desc">Un template Notion personnalisable pour organiser vos tâches et suivre vos revenus.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Tableau de Suivi -->
+      <div class="component-card" data-target="excel">
         <div class="component-icon">
           <i class="fas fa-table"></i>
         </div>
@@ -509,7 +672,8 @@
         <p class="component-desc">Un fichier Excel qui calcule automatiquement vos performances (CTR, ROI, etc.).</p>
       </div>
       
-      <div class="component-card">
+      <!-- Codes Exclusifs -->
+      <div class="component-card" data-target="codes">
         <div class="component-icon">
           <i class="fas fa-code"></i>
         </div>
@@ -518,7 +682,8 @@
         <p class="component-desc">Des scripts pour automatiser la publication et analyser les comportements numériques.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Hacks d'Automatisation -->
+      <div class="component-card" data-target="hacks">
         <div class="component-icon">
           <i class="fas fa-tools"></i>
         </div>
@@ -527,7 +692,8 @@
         <p class="component-desc">Des techniques rares pour optimiser l’engagement et le retargeting.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Introduction Audio -->
+      <div class="component-card" data-target="audio">
         <div class="component-icon">
           <i class="fas fa-headphones"></i>
         </div>
@@ -536,7 +702,8 @@
         <p class="component-desc">Un guide vocal en français pour démarrer rapidement.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Instructions -->
+      <div class="component-card" data-target="instructions">
         <div class="component-icon">
           <i class="fas fa-file-alt"></i>
         </div>
@@ -545,7 +712,8 @@
         <p class="component-desc">Un guide d'installation pour une prise en main facile.</p>
       </div>
       
-      <div class="component-card">
+      <!-- Lien Secret -->
+      <div class="component-card" data-target="secret">
         <div class="component-icon">
           <i class="fas fa-lock"></i>
         </div>
@@ -618,7 +786,192 @@
       Produit Interdit aux Robots. Réservé aux Phantoms. &copy; 2023 Phantom Technologies
     </div>
   </footer>
-
+  
+  <!-- نماذج المحتوى التفاعلي -->
+  <!-- Guide Ultime Modal -->
+  <div class="content-modal" id="guide-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><i class="fas fa-book modal-icon"></i> Guide Ultime Phantom Engine</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Contenu du Guide</h3>
+          <p>Ce guide de 22 pages vous révèle les secrets les mieux gardés de l'automatisation avancée :</p>
+          <ul>
+            <li><strong>Chapitre 1:</strong> Principes fondamentaux de l'automatisation invisible</li>
+            <li><strong>Chapitre 2:</strong> Configurer votre environnement Phantom</li>
+            <li><strong>Chapitre 3:</strong> Techniques avancées de scraping intelligent</li>
+            <li><strong>Chapitre 4:</strong> Automatisation des campagnes marketing</li>
+            <li><strong>Chapitre 5:</strong> Analyse de données en temps réel</li>
+            <li><strong>Chapitre 6:</strong> Sécurité et anonymat avancé</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Extrait Exclusif</h3>
+          <div class="content-highlight">
+            <p>"L'automatisation Phantom repose sur un système d'actions en chaîne qui s'auto-optimise avec chaque exécution. Contrairement aux solutions traditionnelles, notre moteur apprend de vos interactions pour devenir plus efficace à chaque utilisation."</p>
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Structure du Fichier</h3>
+          <div class="file-structure">
+            Phantom_Engine_Guide.pdf
+            <div>├── Introduction</div>
+            <div>├── Configuration</div>
+            <div>├── Cas Pratiques</div>
+            <div>│   ├── Marketing Automation</div>
+            <div>│   ├── Data Scraping</div>
+            <div>│   └── Analyse Performances</div>
+            <div>└── Annexes Techniques</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tableau Excel Modal -->
+  <div class="content-modal" id="excel-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><i class="fas fa-table modal-icon"></i> Tableaux Excel de Suivi Automatique</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Fonctionnalités Clés</h3>
+          <p>Notre tableau Excel calcule automatiquement vos performances marketing :</p>
+          <ul>
+            <li><strong>Suivi ROI:</strong> Calcul automatique du retour sur investissement</li>
+            <li><strong>Analyse CTR:</strong> Taux de clics par campagne et par canal</li>
+            <li><strong>Conversion Rates:</strong> Suivi des taux de conversion en temps réel</li>
+            <li><strong>Projections:</strong> Prévisions basées sur les données historiques</li>
+            <li><strong>Alertes:</strong> Notifications pour les performances anormales</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Structure des Données</h3>
+          <div class="content-highlight">
+            <p>Le fichier contient 5 onglets spécialisés : Campagnes, Canaux, Analyse ROI, Projections, et Paramètres. Chaque entrée est automatiquement synchronisée avec les autres onglets.</p>
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Exemple de Formule</h3>
+          <div class="code-block">
+            =SI(ET(B2&gt;1000; C2&lt;0.05); "Optimiser"; SI(C2&gt;0.1; "Augmenter Budget"; "Stable"))
+          </div>
+          <p>Cette formule automatise les recommandations en fonction du budget dépensé et du taux de conversion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Codes Exclusifs Modal -->
+  <div class="content-modal" id="codes-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><i class="fas fa-code modal-icon"></i> Codes Exclusifs Phantom</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Bibliothèque de Scripts</h3>
+          <p>Accédez à des scripts prêts à l'emploi pour automatiser vos processus :</p>
+          <ul>
+            <li><strong>Auto-Poster:</strong> Publication automatique sur les réseaux sociaux</li>
+            <li><strong>Data Miner:</strong> Extraction intelligente de données web</li>
+            <li><strong>Lead Generator:</strong> Génération automatique de leads qualifiés</li>
+            <li><strong>Content Spinner:</strong> Réécriture intelligente de contenu</li>
+            <li><strong>Analytics Bot:</strong> Analyse automatique des performances</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Exemple de Code</h3>
+          <div class="code-block">
+            // Phantom Auto-Poster v1.2<br>
+            function schedulePosts(posts, platforms) {<br>
+            &nbsp;&nbsp;const phantomEngine = new PhantomCore();<br>
+            &nbsp;&nbsp;phantomEngine.authenticate(API_KEYS);<br>
+            &nbsp;&nbsp;<br>
+            &nbsp;&nbsp;posts.forEach((post, index) => {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;const delay = index * INTERVAL;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;setTimeout(() => {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platforms.forEach(platform => {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phantomEngine.postToPlatform(platform, post);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}, delay);<br>
+            &nbsp;&nbsp;});<br>
+            }
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Instructions d'Utilisation</h3>
+          <ol>
+            <li>Téléchargez le fichier code_exclusif.txt</li>
+            <li>Copiez le script souhaité</li>
+            <li>Collez-le dans votre environnement Phantom</li>
+            <li>Configurez les paramètres selon vos besoins</li>
+            <li>Exécutez et laissez Phantom Engine faire le reste</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hacks d'Automatisation Modal -->
+  <div class="content-modal" id="hacks-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title"><i class="fas fa-tools modal-icon"></i> Hacks d'Automatisation Avancés</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Techniques Exclusives</h3>
+          <p>Découvrez des méthodes rares pour optimiser vos automatisations :</p>
+          <ul>
+            <li><strong>Behavior Cloning:</strong> Reproduction des comportements humains</li>
+            <li><strong>Dynamic IP Rotation:</strong> Changer d'IP automatiquement</li>
+            <li><strong>Captcha Bypass:</strong> Contournement intelligent des captchas</li>
+            <li><strong>CTR Booster:</strong> Augmentation artificielle des taux de clics</li>
+            <li><strong>Retargeting:</strong> Techniques avancées de reciblage</li>
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Exemple de Hack - Rotation d'IP</h3>
+          <div class="code-block">
+            # Phantom IP Rotator<br>
+            def rotate_ip():<br>
+            &nbsp;&nbsp;current_ip = get_current_ip()<br>
+            &nbsp;&nbsp;if ip_blacklisted(current_ip):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;vpn.connect(random.choice(VPN_SERVERS))<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;new_ip = get_current_ip()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;log_action(f"IP changée de {current_ip} à {new_ip}")<br>
+            &nbsp;&nbsp;else:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;schedule_next_check(300) # Vérifier dans 5 minutes
+          </div>
+        </div>
+        
+        <div class="modal-section">
+          <h3>Mise en Garde</h3>
+          <div class="content-highlight">
+            <p>Ces techniques doivent être utilisées de manière éthique et dans le respect des conditions d'utilisation des plateformes. Phantom Technologies décline toute responsabilité en cas d'usage abusif.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Autres modals seraient ajoutés ici pour les autres composants -->
+  
   <script>
     // إنشاء الجسيمات المتحركة
     function createParticles() {
@@ -660,7 +1013,7 @@
       });
     }
     
-    // تهيئة الصفحة
+    // إدارة النماذج التفاعلية
     document.addEventListener('DOMContentLoaded', () => {
       createParticles();
       
@@ -676,6 +1029,40 @@
       window.addEventListener('scroll', animateOnScroll);
       // تشغيل مرة واحدة عند التحميل
       animateOnScroll();
+      
+      // إضافة مستمعات النقر للبطاقات
+      const componentCards = document.querySelectorAll('.component-card');
+      const modals = document.querySelectorAll('.content-modal');
+      const closeButtons = document.querySelectorAll('.close-modal');
+      
+      componentCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const target = card.getAttribute('data-target');
+          const modal = document.getElementById(`${target}-modal`);
+          
+          if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+      
+      closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const modal = button.closest('.content-modal');
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        });
+      });
+      
+      modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          }
+        });
+      });
     });
   </script>
 </body>
