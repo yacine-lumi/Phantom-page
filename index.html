@@ -1,268 +1,837 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phantom Engine v3.0 Lite</title>
-    <style>
-        :root {
-            --primary-bg: #0f0f0f;
-            --primary-text: #e0e0e0;
-            --accent-color: #0ff;
-            --secondary-accent: #08f;
-        }
-        
-        body {
-            background: var(--primary-bg);
-            color: var(--primary-text);
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            transition: background 1s;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            text-align: center;
-            animation: glow 2s infinite alternate;
-            margin-top: 3rem;
-        }
-        
-        @keyframes glow {
-            from { text-shadow: 0 0 5px var(--accent-color); }
-            to { text-shadow: 0 0 20px var(--accent-color); }
-        }
-        
-        .cta {
-            display: block;
-            text-align: center;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background: var(--accent-color);
-            color: #000;
-            font-weight: bold;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: background 0.3s, transform 0.3s;
-            max-width: 300px;
-            cursor: pointer;
-        }
-        
-        .cta:hover {
-            background: var(--secondary-accent);
-            transform: scale(1.05);
-        }
-        
-        .eye-watcher {
-            position: fixed;
-            top: 0;
-            right: 0;
-            background: #000;
-            color: #0f0;
-            padding: 1rem;
-            z-index: 9999;
-            font-size: 0.8rem;
-            border: 1px solid #0f0;
-            display: none;
-        }
-        
-        .video-box {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            width: 200px;
-            height: 120px;
-            background: #000;
-            border: 2px solid var(--accent-color);
-            display: none;
-            z-index: 1000;
-        }
-        
-        .alien-mode {
-            display: none;
-            text-align: center;
-            margin-top: 1rem;
-            padding: 0.5rem;
-            background: #333;
-            border-radius: 5px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: #777;
-        }
-        
-        /* تأثيرات الوضع الشبح */
-        .spectre-mode {
-            animation: spectrePulse 3s infinite;
-        }
-        
-        @keyframes spectrePulse {
-            0% { background: #0f0f0f; }
-            50% { background: #001f33; }
-            100% { background: #0f0f0f; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Engine v1.2 - Automatisation Totale</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8a2be2;
+      --primary-dark: #6a1fc0;
+      --secondary: #00eeff;
+      --accent: #ff0080;
+      --dark-bg: #0a0a0a;
+      --dark-bg-light: #1a1a1a;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --text: #f0f0f0;
+      --text-secondary: #aaa;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.6;
+      transition: background 1s;
+    }
+    
+    /* خلفية جسيمات متحركة */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(138, 43, 226, 0.1);
+      box-shadow: 0 0 10px var(--primary);
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.3; }
+      100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+    }
+    
+    /* شريط التنقل */
+    .navbar {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-icon {
+      font-size: 2rem;
+      color: var(--secondary);
+      text-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    
+    /* مكونات المنتج - الآن في الأعلى */
+    .components {
+      max-width: 1200px;
+      margin: 80px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 20px;
+      transition: all 0.5s ease;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 3px;
+      transition: all 0.5s ease;
+    }
+    
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .component-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(138, 43, 226, 0.1);
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .component-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+    }
+    
+    .component-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--secondary);
+      text-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
+    }
+    
+    .component-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .component-desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .component-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    /* الهيرو - الآن في الأسفل مع الصورة في الأسفل */
+    .hero {
+      max-width: 1200px;
+      margin: 40px auto 100px;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+      letter-spacing: 1px;
+      line-height: 1.2;
+      transition: all 0.5s ease;
+    }
+    
+    .hero p {
+      font-size: 1.6rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+      transition: all 0.5s ease;
+    }
+    
+    .hero-image {
+      max-width: 800px;
+      margin: 40px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      border: 1px solid rgba(138, 43, 226, 0.3);
+    }
+    
+    .hero-image img {
+      width: 100%;
+      display: block;
+    }
+    
+    /* لماذا تختار Phantom Engine */
+    .why-choose {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+      background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(10, 10, 10, 0.9));
+      border-radius: 15px;
+      padding: 50px;
+      border: 1px solid rgba(138, 43, 226, 0.2);
+      box-shadow: 0 0 50px rgba(138, 43, 226, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .why-choose::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(138,43,226,0.05) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+    }
+    
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .benefit {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    
+    .benefit-icon {
+      font-size: 2rem;
+      color: var(--secondary);
+      min-width: 50px;
+      text-align: center;
+    }
+    
+    .benefit-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    
+    .benefit-content p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* دعوة للشراء */
+    .cta-section {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 60px 30px;
+      background: linear-gradient(135deg, var(--primary), #6a1fc0);
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(138, 43, 226, 0.4);
+      z-index: 10;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="none"/><path d="M40,40 Q100,20 160,40 Q180,100 160,160 Q100,180 40,160 Q20,100 40,40Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-size: 300px;
+      opacity: 0.3;
+    }
+    
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    .cta-section p {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .btn-buy {
+      padding: 18px 50px;
+      font-size: 1.3rem;
+      background: var(--accent);
+      border: none;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .btn-buy:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.6);
+    }
+    
+    .btn-buy::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 20px;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(30deg);
+      transition: all 0.8s;
+      z-index: -1;
+    }
+    
+    .btn-buy:hover::after {
+      left: 120%;
+    }
+    
+    /* التذييل */
+    .footer {
+      margin-top: 100px;
+      padding: 50px 20px 30px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(10, 10, 10, 0.8);
+    }
+    
+    .footer p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #444;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* تأثيرات للجوال */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .cta-section {
+        padding: 40px 20px;
+      }
+      
+      .cta-section h2 {
+        font-size: 2rem;
+      }
+      
+      .cta-section p {
+        font-size: 1.1rem;
+      }
+      
+      .btn-buy {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+      }
+      
+      .why-choose {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .logo-text {
+        font-size: 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .component-icon {
+        font-size: 2.5rem;
+      }
+      
+      .component-title {
+        font-size: 1.5rem;
+      }
+      
+      .component-desc {
+        font-size: 1rem;
+      }
+      
+      .btn-buy {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+    }
+    
+    /* ============== خصائص v3.0 المدمجة ============== */
+    
+    /* رسالة المراقبة */
+    .eye-watcher {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #00eeff;
+      padding: 12px 20px;
+      z-index: 9999;
+      font-size: 0.9rem;
+      border: 1px solid #00eeff;
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0, 238, 255, 0.3);
+      display: none;
+    }
+    
+    /* إطار الفيديو */
+    .video-box {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 250px;
+      height: 150px;
+      background: #000;
+      border: 2px solid var(--accent);
+      display: none;
+      z-index: 1000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4);
+    }
+    
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* تأثيرات الوضع الغريب */
+    .spectre-mode {
+      animation: spectrePulse 3s infinite;
+    }
+    
+    @keyframes spectrePulse {
+      0% { background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%); }
+      50% { background: radial-gradient(circle at top right, #001f33 0%, #000a14 70%); }
+      100% { background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%); }
+    }
+    
+    .alien-btn {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(to right, #00eeff, #8a2be2);
+      color: #000;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      max-width: 300px;
+      margin: 20px auto;
+      box-shadow: 0 0 20px rgba(0, 238, 255, 0.5);
+      animation: alienGlow 2s infinite alternate;
+      cursor: pointer;
+    }
+    
+    .alien-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 238, 255, 0.8);
+    }
+    
+    @keyframes alienGlow {
+      0% { box-shadow: 0 0 15px rgba(0, 238, 255, 0.5); }
+      100% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
+    }
+    
+    /* تأثيرات النصوص المتغيرة */
+    .text-transform {
+      animation: textTransform 0.5s ease;
+    }
+    
+    @keyframes textTransform {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <div class="eye-watcher" id="watcher-msg">Tu copies ? Les ombres t'observent...</div>
-    
-    <div class="container">
-        <h1 id="intro">Bienvenue, Voyageur de l'Ombre</h1>
-        <p style="text-align: center;">Tu es à un clic d'accéder à l'Arsenal interdit. Oseras-tu ?</p>
-        
-        <div class="cta" id="cta">Déverrouiller l'accès</div>
-        
-        <div class="alien-mode" id="alienMode">
-            👽 Mode Spectre disponible: <a href="#" id="alienLink">Activer maintenant</a>
-        </div>
-        
-        <div class="video-box" id="videoBox">
-            <iframe id="videoFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        
-        <footer>
-            Phantom Engine v3.0 Lite | Version simplifiée | Hébergement gratuit sur GitHub Pages
-        </footer>
+  <div class="particles" id="particles"></div>
+  
+  <!-- رسالة المراقبة -->
+  <div class="eye-watcher" id="watcher-msg">Tu copies ? Les ombres t'observent...</div>
+  
+  <!-- إطار الفيديو -->
+  <div class="video-box" id="videoBox">
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-ghost"></i>
+      </div>
+      <div class="logo-text">PHANTOM</div>
     </div>
+  </nav>
+  
+  <!-- Boîte à Outils Complète في الأعلى -->
+  <section class="components">
+    <h2 class="section-title" id="section-title">Votre Boîte à Outils Complète</h2>
+    
+    <div class="components-grid">
+      <!-- Guide Ultime -->
+      <div class="component-card" data-target="guide">
+        <div class="component-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3 class="component-title">Guide Ultime</h3>
+        <div class="component-badge">PDF</div>
+        <p class="component-desc">Un PDF de 22 pages révélant des secrets exclusifs pour automatiser vos campagnes et booster votre productivité.</p>
+      </div>
+      
+      <!-- Planificateur Notion -->
+      <div class="component-card" data-target="notion">
+        <div class="component-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h3 class="component-title">Planificateur Notion</h3>
+        <div class="component-badge">HTML</div>
+        <p class="component-desc">Un template Notion personnalisable pour organiser vos tâches et suivre vos revenus.</p>
+      </div>
+      
+      <!-- Tableau de Suivi -->
+      <div class="component-card" data-target="excel">
+        <div class="component-icon">
+          <i class="fas fa-table"></i>
+        </div>
+        <h3 class="component-title">Tableau de Suivi</h3>
+        <div class="component-badge">Excel</div>
+        <p class="component-desc">Un fichier Excel qui calcule automatiquement vos performances (CTR, ROI, etc.).</p>
+      </div>
+      
+      <!-- Codes Exclusifs -->
+      <div class="component-card" data-target="codes">
+        <div class="component-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3 class="component-title">Codes Exclusifs</h3>
+        <div class="component-badge">TXT</div>
+        <p class="component-desc">Des scripts pour automatiser la publication et analyser les comportements numériques.</p>
+      </div>
+      
+      <!-- Hacks d'Automatisation -->
+      <div class="component-card" data-target="hacks">
+        <div class="component-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3 class="component-title">Hacks d'Automatisation</h3>
+        <div class="component-badge">MD</div>
+        <p class="component-desc">Des techniques rares pour optimiser l’engagement et le retargeting.</p>
+      </div>
+      
+      <!-- Introduction Audio -->
+      <div class="component-card" data-target="audio">
+        <div class="component-icon">
+          <i class="fas fa-headphones"></i>
+        </div>
+        <h3 class="component-title">Introduction Audio</h3>
+        <div class="component-badge">MP3</div>
+        <p class="component-desc">Un guide vocal en français pour démarrer rapidement.</p>
+      </div>
+      
+      <!-- Instructions -->
+      <div class="component-card" data-target="instructions">
+        <div class="component-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3 class="component-title">Instructions</h3>
+        <div class="component-badge">TXT</div>
+        <p class="component-desc">Un guide d'installation pour une prise en main facile.</p>
+      </div>
+      
+      <!-- Lien Secret -->
+      <div class="component-card" data-target="secret">
+        <div class="component-icon">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h3 class="component-title">Lien Secret</h3>
+        <div class="component-badge">TXT</div>
+        <p class="component-desc">Accès à des mises à jour, bonus exclusifs et offres spéciales.</p>
+      </div>
+    </div>
+    
+    <!-- زر الوضع الغريب -->
+    <div class="alien-btn" id="alienBtn">
+      <i class="fas fa-alien"></i> Activer le mode Spectre 👽
+    </div>
+  </section>
+  
+  <!-- الهيرو الآن في الأسفل مع الصورة في الأسفل -->
+  <section class="hero">
+    <h1 id="hero-title">Phantom Engine <span style="color: var(--secondary);">v1.2</span></h1>
+    <p id="hero-subtitle">Automatisation Totale, Invisibilité Assurée, Performances Inégalées</p>
+    
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Phantom Engine Interface">
+    </div>
+  </section>
+  
+  <section class="why-choose">
+    <h2 class="section-title">Pourquoi choisir Phantom Engine ?</h2>
+    
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="benefit-content">
+          <h3>Gagnez du temps</h3>
+          <p>Avec des outils prêts à l'emploi et des processus automatisés, vous économiserez des heures de travail chaque jour.</p>
+        </div>
+      </div>
+      
+      <div class="benefit">
+        <div class="benefit-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="benefit-content">
+          <h3>Boostez vos résultats</h3>
+          <p>Des stratégies testées et optimisées pour maximiser votre retour sur investissement.</p>
+        </div>
+      </div>
+      
+      <div class="benefit">
+        <div class="benefit-icon">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <div class="benefit-content">
+          <h3>Accessible à tous</h3>
+          <p>Que vous soyez débutant ou expert, notre solution s'adapte à votre niveau de compétence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="cta-section">
+    <h2>Transformez Votre Productivité Dès Aujourd'hui</h2>
+    <p>Commencez dès maintenant et révolutionnez votre façon de travailler !</p>
+    
+    <button class="btn-buy" id="buyBtn">
+      <i class="fas fa-shopping-cart"></i> Obtenir Phantom Engine
+    </button>
+  </section>
+  
+  <footer class="footer">
+    <p><i class="fas fa-shield-alt"></i> Protection Phantom - Votre vie privée est notre priorité absolue</p>
+    <p><i class="fas fa-sync-alt"></i> Mises à jour automatiques incluses</p>
+    <div class="copyright">
+      &copy; 2023 Phantom Engine. Tous droits réservés. Ce produit est fourni "tel quel" sans garantie d'aucune sorte.
+    </div>
+  </footer>
 
-    <script>
-        // Simulated awareness
-        let viewed = 0;
+  <script>
+    // ============== خصائص Phantom Engine v3.0 المدمجة ==============
+    
+    // 1. إنشاء خلفية الجسيمات
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
         
-        // Configuration
-        const config = {
-            alienModeTime: "03:33", // Heure d'activation du mode alien
-            videoDelay: 15000, // 15 secondes au lieu de 25
-            googleSheetID: '1FAIpQLSdXvHq3T0oD8vPzLg1JwY6uIxO0pQrStUvWw' // ID Google Sheet fictif
-        };
+        // أحجام وألوان عشوائية
+        const size = Math.random() * 30 + 10;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
         
-        // Éléments DOM
-        const elements = {
-            intro: document.getElementById("intro"),
-            cta: document.getElementById("cta"),
-            watcherMsg: document.getElementById("watcher-msg"),
-            videoBox: document.getElementById("videoBox"),
-            alienMode: document.getElementById("alienMode"),
-            alienLink: document.getElementById("alienLink")
-        };
+        // مواقع عشوائية
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
         
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Comportement de défilement
-            window.onscroll = handleScroll;
-            
-            // Surveillant de copie
-            document.addEventListener('copy', handleCopy);
-            
-            // Vérifier le mode alien
-            checkAlienMode();
-            
-            // Délai pour la vidéo
-            setTimeout(() => {
-                elements.videoBox.style.display = "block";
-            }, config.videoDelay);
-            
-            // Configuration du bouton CTA
-            elements.cta.addEventListener('click', unlockAccess);
-        });
+        // ألوان عشوائية
+        const colors = ['rgba(138, 43, 226, 0.1)', 'rgba(0, 238, 255, 0.1)', 'rgba(255, 0, 128, 0.1)'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.background = randomColor;
         
-        // Gestion du défilement
-        function handleScroll() {
-            const height = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = window.scrollY;
-            
-            if ((scrolled / height) > 0.5 && viewed === 0) {
-                elements.intro.textContent = "Tu persistes... tu es différent.";
-                elements.cta.textContent = "Ouvre le portail caché";
-                viewed = 1;
-                
-                // Enregistrer l'interaction dans Google Sheets (simulé)
-                logInteraction('scroll_mid');
-            }
-        }
+        // مدة عشوائية للتحريك
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = `${duration}s`;
         
-        // Gestion de la copie
-        function handleCopy() {
-            elements.watcherMsg.style.display = "block";
-            setTimeout(() => {
-                elements.watcherMsg.style.display = "none";
-            }, 3000);
-            
-            // Enregistrer l'interaction dans Google Sheets (simulé)
-            logInteraction('copy_action');
-        }
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // 2. تغيير النصوص عند التمرير
+    let viewed = 0;
+    window.onscroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      
+      if ((scrolled / height) > 0.5 && viewed === 0) {
+        document.getElementById("section-title").textContent = "Tu persistes... tu es différent.";
+        document.getElementById("section-title").classList.add('text-transform');
         
-        // Vérifier le mode alien
-        function checkAlienMode() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const currentTime = `${hours}:${minutes}`;
-            
-            if (currentTime === config.alienModeTime) {
-                elements.alienMode.style.display = "block";
-                elements.alienLink.addEventListener('click', activateSpectreMode);
-            }
-        }
+        document.getElementById("hero-title").innerHTML = 'Mode <span style="color: var(--accent);">Spectre</span> Activé';
+        document.getElementById("hero-subtitle").textContent = "Accès dimensionnel ouvert";
         
-        // Activer le mode spectre
-        function activateSpectreMode(e) {
-            e.preventDefault();
-            document.body.classList.add('spectre-mode');
-            elements.intro.textContent = "MODE SPECTRE ACTIVÉ";
-            elements.cta.textContent = "ACCÈS DIMENSIONNEL OUVERT";
-            
-            // Enregistrer l'activation dans Google Sheets (simulé)
-            logInteraction('alien_mode_activated');
-            
-            // Redirection vers une ressource gratuite
-            setTimeout(() => {
-                window.open('https://github.com', '_blank');
-            }, 2000);
-        }
+        document.getElementById("section-title").style.background = "linear-gradient(to right, var(--accent), var(--secondary))";
+        document.getElementById("section-title").style.webkitBackgroundClip = "text";
+        document.getElementById("section-title").style.webkitTextFillColor = "transparent";
         
-        // Déverrouiller l'accès
-        function unlockAccess() {
-            // Envoyer une requête simulée à Google Forms
-            const formUrl = `https://docs.google.com/forms/d/e/${config.googleSheetID}/formResponse`;
-            const data = new FormData();
-            data.append('entry.123456789', 'access_request'); // ID de champ fictif
-            
-            // Utiliser fetch pour envoyer les données (simulé)
-            fetch(formUrl, {
-                method: 'POST',
-                body: data,
-                mode: 'no-cors'
-            });
-            
-            // Effet visuel
-            elements.cta.textContent = "ACCÈS AUTORISÉ...";
-            elements.cta.style.background = "#0f0";
-            
-            // Redirection après délai
-            setTimeout(() => {
-                window.location.href = "https://github.com"; // Ressource gratuite
-            }, 1500);
-        }
+        document.getElementById("section-title").style.after.background = "linear-gradient(to right, var(--accent), var(--secondary))";
         
-        // Journalisation dans Google Sheets (simulé)
-        function logInteraction(action) {
-            // Dans une implémentation réelle, ceci enverrait les données à Google Sheets
-            console.log(`Interaction enregistrée: ${action} à ${new Date().toLocaleTimeString()}`);
-        }
-    </script>
+        viewed = 1;
+      }
+    };
+    
+    // 3. مراقبة النسخ
+    document.addEventListener('copy', () => {
+      const msg = document.getElementById("watcher-msg");
+      msg.style.display = "block";
+      setTimeout(() => msg.style.display = "none", 3000);
+    });
+    
+    // 4. ظهور الفيديو بعد تأخير
+    setTimeout(() => {
+      document.getElementById("videoBox").style.display = "block";
+    }, 20000); // 20 ثانية
+    
+    // 5. زر الوضع الغريب (03:33 صباحاً)
+    const now = new Date();
+    if (now.getHours() === 3 && now.getMinutes() === 33) {
+      document.getElementById("alienBtn").style.display = "block";
+    }
+    
+    // تفعيل الوضع الغريب عند النقر
+    document.getElementById("alienBtn").addEventListener('click', function() {
+      document.body.classList.add('spectre-mode');
+      document.getElementById("hero-title").innerHTML = 'MODE <span style="color: var(--accent);">SPECTRE</span> ACTIVÉ';
+      document.getElementById("hero-subtitle").textContent = "Accès dimensionnel ouvert";
+      
+      // تغيير لون شريط العنوان
+      document.getElementById("section-title").style.background = "linear-gradient(to right, var(--accent), var(--secondary))";
+      document.getElementById("section-title").style.webkitBackgroundClip = "text";
+      document.getElementById("section-title").style.webkitTextFillColor = "transparent";
+      
+      // تغيير لون زر الشراء
+      document.getElementById("buyBtn").style.background = "linear-gradient(to right, var(--secondary), var(--accent))";
+      
+      // إخفاء زر الوضع الغريب بعد التفعيل
+      this.style.display = "none";
+    });
+    
+    // 6. تفعيل الجسيمات عند التحميل
+    document.addEventListener('DOMContentLoaded', createParticles);
+  </script>
 </body>
 </html>
