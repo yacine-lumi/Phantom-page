@@ -1,21 +1,21 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phantom Engine v1.2 - Automatisation Totale</title>
+  <title>Nexus Automate Pro - Solution d'Automatisation Avancée</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #8a2be2;
-      --primary-dark: #6a1fc0;
-      --secondary: #00eeff;
-      --accent: #ff0080;
-      --dark-bg: #0a0a0a;
-      --dark-bg-light: #1a1a1a;
-      --card-bg: rgba(30, 30, 30, 0.7);
-      --text: #f0f0f0;
-      --text-secondary: #aaa;
+      --primary: #4a6bff;
+      --primary-dark: #3a5be0;
+      --secondary: #00e5ff;
+      --accent: #ff4d94;
+      --dark-bg: #0f172a;
+      --dark-bg-light: #1e293b;
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
       --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
@@ -27,13 +27,12 @@
     }
     
     body {
-      background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%);
+      background: linear-gradient(135deg, var(--dark-bg), var(--dark-bg-light));
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
       line-height: 1.6;
-      transition: background 1s;
     }
     
     /* خلفية جسيمات متحركة */
@@ -50,8 +49,8 @@
     .particle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(138, 43, 226, 0.1);
-      box-shadow: 0 0 10px var(--primary);
+      background: rgba(74, 107, 255, 0.1);
+      box-shadow: 0 0 10px rgba(74, 107, 255, 0.2);
       animation: float 15s infinite linear;
     }
     
@@ -76,12 +75,13 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      cursor: pointer;
     }
     
     .logo-icon {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: var(--secondary);
-      text-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
       animation: pulse 2s infinite;
     }
     
@@ -92,15 +92,40 @@
     }
     
     .logo-text {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
       background: linear-gradient(to right, var(--secondary), var(--primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 1px;
+      font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
     }
     
-    /* مكونات المنتج - الآن في الأعلى */
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      padding: 8px 15px;
+      border-radius: 30px;
+    }
+    
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(74, 107, 255, 0.1);
+    }
+    
+    .nav-link.active {
+      color: var(--secondary);
+      background: rgba(0, 229, 255, 0.1);
+    }
+    
+    /* مكونات المنتج */
     .components {
       max-width: 1200px;
       margin: 80px auto 60px;
@@ -108,27 +133,29 @@
     }
     
     .section-title {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       text-align: center;
       margin-bottom: 60px;
       position: relative;
       display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
       padding: 0 20px;
-      transition: all 0.5s ease;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
     
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 100%;
-      height: 3px;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
       background: linear-gradient(to right, var(--primary), var(--accent));
       border-radius: 3px;
-      transition: all 0.5s ease;
     }
     
     .components-grid {
@@ -139,13 +166,13 @@
     
     .component-card {
       background: var(--card-bg);
-      border-radius: 15px;
+      border-radius: 16px;
       padding: 30px;
       text-align: center;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(138, 43, 226, 0.1);
+      border: 1px solid rgba(74, 107, 255, 0.15);
       transition: var(--transition);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
       cursor: pointer;
@@ -153,15 +180,15 @@
     
     .component-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
-      border: 1px solid rgba(138, 43, 226, 0.3);
+      box-shadow: 0 15px 40px rgba(74, 107, 255, 0.3);
+      border: 1px solid rgba(74, 107, 255, 0.3);
     }
     
     .component-icon {
       font-size: 3.5rem;
       margin-bottom: 20px;
       color: var(--secondary);
-      text-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
     }
     
     .component-title {
@@ -190,7 +217,7 @@
       font-weight: 600;
     }
     
-    /* الهيرو - الآن في الأسفل مع الصورة في الأسفل */
+    /* الهيرو */
     .hero {
       max-width: 1200px;
       margin: 40px auto 100px;
@@ -201,51 +228,55 @@
     }
     
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       margin-bottom: 20px;
       background: linear-gradient(to right, var(--secondary), var(--primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-      letter-spacing: 1px;
-      line-height: 1.2;
-      transition: all 0.5s ease;
+      text-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      font-weight: 800;
     }
     
     .hero p {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       color: var(--text-secondary);
       max-width: 800px;
       margin: 0 auto 40px;
       line-height: 1.5;
-      transition: all 0.5s ease;
     }
     
     .hero-image {
-      max-width: 800px;
-      margin: 40px auto;
-      border-radius: 15px;
+      max-width: 900px;
+      margin: 50px auto;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
       position: relative;
-      border: 1px solid rgba(138, 43, 226, 0.3);
+      border: 1px solid rgba(74, 107, 255, 0.3);
     }
     
     .hero-image img {
       width: 100%;
       display: block;
+      transition: transform 0.5s ease;
     }
     
-    /* لماذا تختار Phantom Engine */
+    .hero-image:hover img {
+      transform: scale(1.03);
+    }
+    
+    /* لماذا تختار Nexus */
     .why-choose {
       max-width: 1200px;
       margin: 100px auto;
       padding: 0 20px;
-      background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(10, 10, 10, 0.9));
-      border-radius: 15px;
-      padding: 50px;
-      border: 1px solid rgba(138, 43, 226, 0.2);
-      box-shadow: 0 0 50px rgba(138, 43, 226, 0.2);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border-radius: 20px;
+      padding: 60px 50px;
+      border: 1px solid rgba(74, 107, 255, 0.2);
+      box-shadow: 0 0 60px rgba(74, 107, 255, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -257,53 +288,56 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(138,43,226,0.05) 0%, rgba(0,0,0,0) 70%);
+      background: radial-gradient(circle, rgba(74,107,255,0.05) 0%, rgba(0,0,0,0) 70%);
       z-index: -1;
     }
     
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
+      gap: 40px;
+      margin-top: 60px;
     }
     
     .benefit {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       align-items: flex-start;
     }
     
     .benefit-icon {
-      font-size: 2rem;
+      font-size: 2.3rem;
       color: var(--secondary);
-      min-width: 50px;
+      min-width: 60px;
       text-align: center;
+      background: rgba(0, 229, 255, 0.1);
+      padding: 15px;
+      border-radius: 15px;
     }
     
     .benefit-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.7rem;
+      margin-bottom: 15px;
       color: var(--text);
     }
     
     .benefit-content p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.7;
     }
     
     /* دعوة للشراء */
     .cta-section {
       max-width: 800px;
-      margin: 80px auto;
-      padding: 60px 30px;
-      background: linear-gradient(135deg, var(--primary), #6a1fc0);
-      border-radius: 15px;
+      margin: 100px auto;
+      padding: 70px 40px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(138, 43, 226, 0.4);
+      box-shadow: 0 25px 60px rgba(74, 107, 255, 0.4);
       z-index: 10;
     }
     
@@ -316,18 +350,19 @@
       height: 100%;
       background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="none"/><path d="M40,40 Q100,20 160,40 Q180,100 160,160 Q100,180 40,160 Q20,100 40,40Z" fill="rgba(255,255,255,0.05)"/></svg>');
       background-size: 300px;
-      opacity: 0.3;
+      opacity: 0.2;
     }
     
     .cta-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
       color: white;
+      font-weight: 700;
     }
     
     .cta-section p {
-      font-size: 1.4rem;
-      margin-bottom: 30px;
+      font-size: 1.5rem;
+      margin-bottom: 35px;
       color: rgba(255,255,255,0.9);
       max-width: 600px;
       margin-left: auto;
@@ -335,8 +370,8 @@
     }
     
     .btn-buy {
-      padding: 18px 50px;
-      font-size: 1.3rem;
+      padding: 20px 55px;
+      font-size: 1.4rem;
       background: var(--accent);
       border: none;
       color: white;
@@ -345,18 +380,18 @@
       transition: var(--transition);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 5px 20px rgba(255, 0, 128, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 77, 148, 0.4);
       letter-spacing: 1px;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 600;
+      gap: 15px;
+      font-weight: 700;
       z-index: 2;
     }
     
     .btn-buy:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.6);
+      transform: translateY(-7px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(255, 77, 148, 0.6);
     }
     
     .btn-buy::after {
@@ -378,70 +413,95 @@
     
     /* التذييل */
     .footer {
-      margin-top: 100px;
-      padding: 50px 20px 30px;
+      margin-top: 120px;
+      padding: 60px 20px 40px;
       text-align: center;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(10, 10, 10, 0.8);
+      background: rgba(15, 23, 42, 0.9);
     }
     
     .footer p {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    
+    .dashboard-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .dashboard-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
     }
     
     .copyright {
-      margin-top: 30px;
-      font-size: 0.85rem;
-      color: #444;
-      padding-top: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #64748b;
+      padding-top: 25px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     /* تأثيرات للجوال */
     @media (max-width: 768px) {
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
       
       .hero p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
       
       .section-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .cta-section {
-        padding: 40px 20px;
+        padding: 50px 25px;
       }
       
       .cta-section h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .cta-section p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
       
       .btn-buy {
-        padding: 15px 40px;
-        font-size: 1.1rem;
+        padding: 17px 45px;
+        font-size: 1.2rem;
       }
       
       .why-choose {
-        padding: 30px;
+        padding: 40px 30px;
+      }
+      
+      .logo-text {
+        font-size: 1.7rem;
+      }
+      
+      .nav-links {
+        display: none;
       }
     }
     
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .hero p {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
       
       .logo-text {
@@ -449,11 +509,11 @@
       }
       
       .section-title {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
       }
       
       .component-icon {
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
       
       .component-title {
@@ -465,448 +525,431 @@
       }
       
       .btn-buy {
-        padding: 12px 30px;
-        font-size: 1rem;
+        padding: 15px 35px;
+        font-size: 1.1rem;
       }
     }
     
-    /* ============== خصائص v3.0 المدمجة ============== */
-    
-    /* رسالة المراقبة */
-    .eye-watcher {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #00eeff;
-      padding: 12px 20px;
-      z-index: 9999;
-      font-size: 0.9rem;
-      border: 1px solid #00eeff;
-      border-radius: 5px;
-      box-shadow: 0 0 15px rgba(0, 238, 255, 0.3);
+    /* لوحة التحكم */
+    .dashboard-container {
       display: none;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
     }
     
-    /* إطار الفيديو */
-    .video-box {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 250px;
-      height: 150px;
-      background: #000;
-      border: 2px solid var(--accent);
-      display: none;
-      z-index: 1000;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4);
-    }
-    
-    .video-box iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    
-    /* تأثيرات الوضع الغريب */
-    .spectre-mode {
-      animation: spectrePulse 3s infinite;
-    }
-    
-    @keyframes spectrePulse {
-      0% { background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%); }
-      50% { background: radial-gradient(circle at top right, #001f33 0%, #000a14 70%); }
-      100% { background: radial-gradient(circle at top right, #0a0a0a 0%, #1a1a1a 70%); }
-    }
-    
-    .alien-btn {
-      display: none;
-      text-align: center;
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      background: linear-gradient(to right, #00eeff, #8a2be2);
-      color: #000;
-      font-weight: bold;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s;
-      max-width: 300px;
-      margin: 20px auto;
-      box-shadow: 0 0 20px rgba(0, 238, 255, 0.5);
-      animation: alienGlow 2s infinite alternate;
-      cursor: pointer;
-    }
-    
-    .alien-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(0, 238, 255, 0.8);
-    }
-    
-    @keyframes alienGlow {
-      0% { box-shadow: 0 0 15px rgba(0, 238, 255, 0.5); }
-      100% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
-    }
-    
-    /* تأثيرات النصوص المتغيرة */
-    .text-transform {
-      animation: textTransform 0.5s ease;
-    }
-    
-    @keyframes textTransform {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* النوافذ المنبثقة */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .modal-content {
-      background: var(--dark-bg-light);
-      border-radius: 15px;
-      padding: 30px;
-      width: 90%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
-    }
-    
-    .modal-header {
+    .dashboard-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+      margin-bottom: 30px;
     }
     
-    .modal-title {
-      font-size: 1.8rem;
+    .dashboard-title {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      border: 1px solid rgba(74, 107, 255, 0.15);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
       color: var(--secondary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      margin-bottom: 10px;
     }
     
-    .close-modal {
-      background: var(--accent);
-      color: white;
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
     }
     
-    .modal-body {
-      padding: 15px 0;
+    .charts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
     }
     
-    .modal-body p {
-      margin-bottom: 15px;
-      line-height: 1.6;
+    .chart-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid rgba(74, 107, 255, 0.15);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
     
-    .download-btn {
-      display: inline-block;
-      padding: 10px 25px;
-      background: var(--primary);
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      margin-top: 15px;
-      transition: all 0.3s;
+    .chart-title {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: var(--text);
+      text-align: center;
     }
     
-    .download-btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-3px);
-    }
-    
-    /* رسالة التأكيد */
-    .confirmation {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      padding: 15px 25px;
+    .chart {
+      height: 300px;
+      background: rgba(0, 0, 0, 0.1);
       border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(138, 43, 226, 0.5);
-      display: none;
-      z-index: 1500;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    
+    .bar {
+      width: 40px;
+      background: linear-gradient(to top, var(--primary), var(--secondary));
+      border-radius: 5px 5px 0 0;
+      position: relative;
+    }
+    
+    .bar-label {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    .recent-activity {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid rgba(74, 107, 255, 0.15);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .activity-title {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--text);
+      text-align: center;
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 229, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+    
+    .activity-content {
+      flex: 1;
+    }
+    
+    .activity-content p {
+      margin-bottom: 5px;
+    }
+    
+    .activity-time {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
     }
   </style>
 </head>
 <body>
   <div class="particles" id="particles"></div>
   
-  <!-- رسالة المراقبة -->
-  <div class="eye-watcher" id="watcher-msg">Tu copies ? Les ombres t'observent...</div>
-  
-  <!-- إطار الفيديو -->
-  <div class="video-box" id="videoBox">
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  
-  <!-- رسالة التأكيد -->
-  <div class="confirmation" id="confirmation">Votre intérêt a été enregistré !</div>
-  
   <nav class="navbar">
-    <div class="logo">
+    <div class="logo" id="logo">
       <div class="logo-icon">
-        <i class="fas fa-ghost"></i>
+        <i class="fas fa-brain"></i>
       </div>
-      <div class="logo-text">PHANTOM</div>
+      <div class="logo-text">NEXUS AUTOMATE PRO</div>
+    </div>
+    
+    <div class="nav-links">
+      <a href="#" class="nav-link active" id="home-link">Accueil</a>
+      <a href="#" class="nav-link" id="dashboard-link">Dashboard</a>
+      <a href="#" class="nav-link">Documentation</a>
+      <a href="#" class="nav-link">Support</a>
     </div>
   </nav>
   
-  <!-- Boîte à Outils Complète في الأعلى -->
-  <section class="components">
-    <h2 class="section-title" id="section-title">Votre Boîte à Outils Complète</h2>
+  <!-- الصفحة الرئيسية -->
+  <div id="main-content">
+    <!-- Boîte à Outils Complète -->
+    <section class="components">
+      <h2 class="section-title" id="section-title">Votre Suite d'Automatisation Complète</h2>
+      
+      <div class="components-grid">
+        <!-- Guide Ultime -->
+        <div class="component-card" data-target="guide">
+          <div class="component-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3 class="component-title">Guide Stratégique</h3>
+          <div class="component-badge">PDF</div>
+          <p class="component-desc">Manuel avancé de 32 pages pour automatiser vos processus métier et optimiser la productivité.</p>
+        </div>
+        
+        <!-- Planificateur -->
+        <div class="component-card" data-target="notion">
+          <div class="component-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3 class="component-title">Planificateur Pro</h3>
+          <div class="component-badge">NOTION</div>
+          <p class="component-desc">Template Notion premium pour gérer projets, tâches et flux de travail avec automatisation.</p>
+        </div>
+        
+        <!-- Tableau de Suivi -->
+        <div class="component-card" data-target="excel">
+          <div class="component-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="component-title">Tableau de Performance</h3>
+          <div class="component-badge">EXCEL</div>
+          <p class="component-desc">Dashboard Excel avec calculs automatisés de KPI et visualisation de données avancée.</p>
+        </div>
+        
+        <!-- Codes Exclusifs -->
+        <div class="component-card" data-target="codes">
+          <div class="component-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="component-title">Scripts Intelligents</h3>
+          <div class="component-badge">PYTHON</div>
+          <p class="component-desc">Collection de scripts Python pour automatiser tâches répétitives et analyses de données.</p>
+        </div>
+      </div>
+      
+      <!-- زر الوضع المتقدم -->
+      <div class="alien-btn" id="alienBtn">
+        <i class="fas fa-rocket"></i> Activer le Mode Avancé
+      </div>
+    </section>
     
-    <div class="components-grid">
-      <!-- Guide Ultime -->
-      <div class="component-card" data-target="guide">
-        <div class="component-icon">
-          <i class="fas fa-book"></i>
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+      <h1 id="hero-title">NEXUS AUTOMATE <span style="color: var(--secondary);">PRO</span></h1>
+      <p id="hero-subtitle">Automatisation Intelligente • Productivité Maximale • Résultats Exceptionnels</p>
+      
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Nexus Automate Pro Interface">
+      </div>
+    </section>
+    
+    <section class="why-choose">
+      <h2 class="section-title">Pourquoi Nexus Automate Pro ?</h2>
+      
+      <div class="benefits">
+        <div class="benefit">
+          <div class="benefit-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="benefit-content">
+            <h3>Gain de Temps Radical</h3>
+            <p>Automatisez jusqu'à 80% de vos tâches répétitives et concentrez-vous sur ce qui compte vraiment.</p>
+          </div>
         </div>
-        <h3 class="component-title">Guide Ultime</h3>
-        <div class="component-badge">PDF</div>
-        <p class="component-desc">Un PDF de 22 pages révélant des secrets exclusifs pour automatiser vos campagnes et booster votre productivité.</p>
+        
+        <div class="benefit">
+          <div class="benefit-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <div class="benefit-content">
+            <h3>Décisions Éclairées</h3>
+            <p>Tableaux de bord intelligents et analyses prédictives pour des décisions stratégiques.</p>
+          </div>
+        </div>
+        
+        <div class="benefit">
+          <div class="benefit-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="benefit-content">
+            <h3>Sécurité Renforcée</h3>
+            <p>Protocoles de sécurité avancés pour protéger vos données et processus métier.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cta-section">
+      <h2>Transformez Votre Entreprise Dès Aujourd'hui</h2>
+      <p>Adoptez la solution d'automatisation la plus avancée du marché</p>
+      
+      <button class="btn-buy" id="buyBtn">
+        <i class="fas fa-bolt"></i> Obtenir Nexus Automate Pro
+      </button>
+    </section>
+    
+    <footer class="footer">
+      <p><i class="fas fa-lock"></i> Sécurité Entreprise - Chiffrement AES-256</p>
+      <p><i class="fas fa-sync-alt"></i> Mises à jour automatiques incluses</p>
+      <p><i class="fas fa-headset"></i> Support technique 24/7</p>
+      
+      <a href="#" class="dashboard-link" id="footer-dashboard">
+        <i class="fas fa-tachometer-alt"></i> Accéder au Dashboard Complet
+      </a>
+      
+      <div class="copyright">
+        &copy; 2023 Nexus Automate Pro. Tous droits réservés.<br>
+        Solution professionnelle d'automatisation des processus métier.
+      </div>
+    </footer>
+  </div>
+  
+  <!-- لوحة التحكم -->
+  <div class="dashboard-container" id="dashboard">
+    <div class="dashboard-header">
+      <h2 class="dashboard-title">Tableau de Bord Nexus</h2>
+      <button class="btn-buy" id="back-to-home">
+        <i class="fas fa-arrow-left"></i> Retour à l'accueil
+      </button>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">2,548</div>
+        <div class="stat-label">Processus Automatisés</div>
       </div>
       
-      <!-- Planificateur Notion -->
-      <div class="component-card" data-target="notion">
-        <div class="component-icon">
-          <i class="fas fa-calendar-alt"></i>
-        </div>
-        <h3 class="component-title">Planificateur Notion</h3>
-        <div class="component-badge">HTML</div>
-        <p class="component-desc">Un template Notion personnalisable pour organiser vos tâches et suivre vos revenus.</p>
+      <div class="stat-card">
+        <div class="stat-value">78%</div>
+        <div class="stat-label">Gain de Productivité</div>
       </div>
       
-      <!-- Tableau de Suivi -->
-      <div class="component-card" data-target="excel">
-        <div class="component-icon">
-          <i class="fas fa-table"></i>
-        </div>
-        <h3 class="component-title">Tableau de Suivi</h3>
-        <div class="component-badge">Excel</div>
-        <p class="component-desc">Un fichier Excel qui calcule automatiquement vos performances (CTR, ROI, etc.).</p>
+      <div class="stat-card">
+        <div class="stat-value">32</div>
+        <div class="stat-label">Scripts Actifs</div>
       </div>
       
-      <!-- Codes Exclusifs -->
-      <div class="component-card" data-target="codes">
-        <div class="component-icon">
+      <div class="stat-card">
+        <div class="stat-value">99.7%</div>
+        <div class="stat-label">Taux de Réussite</div>
+      </div>
+    </div>
+    
+    <div class="charts-container">
+      <div class="chart-card">
+        <h3 class="chart-title">Activité des Processus (7 jours)</h3>
+        <div class="chart" id="process-chart">
+          <div class="bar" style="height: 70%;"><span class="bar-label">Lun</span></div>
+          <div class="bar" style="height: 85%;"><span class="bar-label">Mar</span></div>
+          <div class="bar" style="height: 60%;"><span class="bar-label">Mer</span></div>
+          <div class="bar" style="height: 90%;"><span class="bar-label">Jeu</span></div>
+          <div class="bar" style="height: 75%;"><span class="bar-label">Ven</span></div>
+          <div class="bar" style="height: 50%;"><span class="bar-label">Sam</span></div>
+          <div class="bar" style="height: 40%;"><span class="bar-label">Dim</span></div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3 class="chart-title">Utilisation des Ressources</h3>
+        <div class="chart" id="resources-chart">
+          <div class="bar" style="height: 60%;"><span class="bar-label">CPU</span></div>
+          <div class="bar" style="height: 45%;"><span class="bar-label">Mémoire</span></div>
+          <div class="bar" style="height: 30%;"><span class="bar-label">Stockage</span></div>
+          <div class="bar" style="height: 80%;"><span class="bar-label">Réseau</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="recent-activity">
+      <h3 class="activity-title">Activité Récente</h3>
+      
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <div class="activity-content">
+          <p>Processus "Rapports Financiers" exécuté avec succès</p>
+          <div class="activity-time">Il y a 5 minutes</div>
+        </div>
+      </div>
+      
+      <div class="activity-item">
+        <div class="activity-icon">
           <i class="fas fa-code"></i>
         </div>
-        <h3 class="component-title">Codes Exclusifs</h3>
-        <div class="component-badge">TXT</div>
-        <p class="component-desc">Des scripts pour automatiser la publication et analyser les comportements numériques.</p>
-      </div>
-      
-      <!-- Hacks d'Automatisation -->
-      <div class="component-card" data-target="hacks">
-        <div class="component-icon">
-          <i class="fas fa-tools"></i>
-        </div>
-        <h3 class="component-title">Hacks d'Automatisation</h3>
-        <div class="component-badge">MD</div>
-        <p class="component-desc">Des techniques rares pour optimiser l’engagement et le retargeting.</p>
-      </div>
-      
-      <!-- Introduction Audio -->
-      <div class="component-card" data-target="audio">
-        <div class="component-icon">
-          <i class="fas fa-headphones"></i>
-        </div>
-        <h3 class="component-title">Introduction Audio</h3>
-        <div class="component-badge">MP3</div>
-        <p class="component-desc">Un guide vocal en français pour démarrer rapidement.</p>
-      </div>
-      
-      <!-- Instructions -->
-      <div class="component-card" data-target="instructions">
-        <div class="component-icon">
-          <i class="fas fa-file-alt"></i>
-        </div>
-        <h3 class="component-title">Instructions</h3>
-        <div class="component-badge">TXT</div>
-        <p class="component-desc">Un guide d'installation pour une prise en main facile.</p>
-      </div>
-      
-      <!-- Lien Secret -->
-      <div class="component-card" data-target="secret">
-        <div class="component-icon">
-          <i class="fas fa-lock"></i>
-        </div>
-        <h3 class="component-title">Lien Secret</h3>
-        <div class="component-badge">TXT</div>
-        <p class="component-desc">Accès à des mises à jour, bonus exclusifs et offres spéciales.</p>
-      </div>
-    </div>
-    
-    <!-- زر الوضع الغريب -->
-    <div class="alien-btn" id="alienBtn">
-      <i class="fas fa-alien"></i> Activer le mode Spectre 👽
-    </div>
-  </section>
-  
-  <!-- الهيرو الآن في الأسفل مع الصورة في الأسفل -->
-  <section class="hero">
-    <h1 id="hero-title">Phantom Engine <span style="color: var(--secondary);">v1.2</span></h1>
-    <p id="hero-subtitle">Automatisation Totale, Invisibilité Assurée, Performances Inégalées</p>
-    
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Phantom Engine Interface">
-    </div>
-  </section>
-  
-  <section class="why-choose">
-    <h2 class="section-title">Pourquoi choisir Phantom Engine ?</h2>
-    
-    <div class="benefits">
-      <div class="benefit">
-        <div class="benefit-icon">
-          <i class="fas fa-clock"></i>
-        </div>
-        <div class="benefit-content">
-          <h3>Gagnez du temps</h3>
-          <p>Avec des outils prêts à l'emploi et des processus automatisés, vous économiserez des heures de travail chaque jour.</p>
+        <div class="activity-content">
+          <p>Script "Analyse Données" mis à jour</p>
+          <div class="activity-time">Il y a 1 heure</div>
         </div>
       </div>
       
-      <div class="benefit">
-        <div class="benefit-icon">
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="activity-content">
+          <p>Nouvel utilisateur enregistré: admin@entreprise.com</p>
+          <div class="activity-time">Il y a 3 heures</div>
+        </div>
+      </div>
+      
+      <div class="activity-item">
+        <div class="activity-icon">
           <i class="fas fa-chart-line"></i>
         </div>
-        <div class="benefit-content">
-          <h3>Boostez vos résultats</h3>
-          <p>Des stratégies testées et optimisées pour maximiser votre retour sur investissement.</p>
+        <div class="activity-content">
+          <p>Rapport de performance généré automatiquement</p>
+          <div class="activity-time">Il y a 6 heures</div>
         </div>
-      </div>
-      
-      <div class="benefit">
-        <div class="benefit-icon">
-          <i class="fas fa-user-friends"></i>
-        </div>
-        <div class="benefit-content">
-          <h3>Accessible à tous</h3>
-          <p>Que vous soyez débutant ou expert, notre solution s'adapte à votre niveau de compétence.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="cta-section">
-    <h2>Transformez Votre Productivité Dès Aujourd'hui</h2>
-    <p>Commencez dès maintenant et révolutionnez votre façon de travailler !</p>
-    
-    <button class="btn-buy" id="buyBtn">
-      <i class="fas fa-shopping-cart"></i> Obtenir Phantom Engine
-    </button>
-  </section>
-  
-  <footer class="footer">
-    <p><i class="fas fa-shield-alt"></i> Protection Phantom - Votre vie privée est notre priorité absolue</p>
-    <p><i class="fas fa-sync-alt"></i> Mises à jour automatiques incluses</p>
-    <div class="copyright">
-      &copy; 2023 Phantom Engine. Tous droits réservés. Ce produit est fourni "tel quel" sans garantie d'aucune sorte.
-    </div>
-  </footer>
-
-  <!-- النوافذ المنبثقة -->
-  <div class="modal" id="guideModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-book"></i> Guide Ultime</h3>
-        <button class="close-modal" id="closeGuide">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Ce guide PDF de 22 pages vous révèle des secrets exclusifs pour automatiser vos campagnes et booster votre productivité.</p>
-        <p>Contenu exclusif :</p>
-        <ul>
-          <li>Stratégies d'automatisation avancées</li>
-          <li>Méthodes pour augmenter votre ROI</li>
-          <li>Techniques d'optimisation du temps</li>
-          <li>Cas pratiques et exemples concrets</li>
-        </ul>
-        <a href="#" class="download-btn">Télécharger le PDF</a>
       </div>
     </div>
   </div>
-  
-  <div class="modal" id="notionModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-calendar-alt"></i> Planificateur Notion</h3>
-        <button class="close-modal" id="closeNotion">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Un template Notion personnalisable pour organiser vos tâches et suivre vos revenus.</p>
-        <p>Fonctionnalités :</p>
-        <ul>
-          <li>Tableaux de suivi de projets</li>
-          <li>Calendrier intégré</li>
-          <li>Suivi des revenus automatisé</li>
-          <li>Dashboard de performance</li>
-        </ul>
-        <a href="#" class="download-btn">Obtenir le Template</a>
-      </div>
-    </div>
-  </div>
-  
-  <!-- نوافذ أخرى هنا -->
 
   <script>
-    // ============== خصائص Phantom Engine v3.0 المدمجة ==============
-    
-    // 1. إنشاء خلفية الجسيمات
+    // ============== إنشاء خلفية الجسيمات ==============
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
-      const particleCount = 30;
+      const particleCount = 35;
       
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        // أحجام وألوان عشوائية
         const size = Math.random() * 30 + 10;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
-        // مواقع عشوائية
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
         particle.style.left = `${posX}%`;
         particle.style.top = `${posY}%`;
         
-        // ألوان عشوائية
-        const colors = ['rgba(138, 43, 226, 0.1)', 'rgba(0, 238, 255, 0.1)', 'rgba(255, 0, 128, 0.1)'];
+        const colors = ['rgba(74, 107, 255, 0.1)', 'rgba(0, 229, 255, 0.1)', 'rgba(255, 77, 148, 0.1)'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         particle.style.background = randomColor;
         
-        // مدة عشوائية للتحريك
         const duration = Math.random() * 20 + 10;
         particle.style.animationDuration = `${duration}s`;
         
@@ -914,110 +957,79 @@
       }
     }
     
-    // 2. تغيير النصوص عند التمرير
-    let viewed = 0;
-    window.onscroll = () => {
-      const height = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
-      
-      if ((scrolled / height) > 0.5 && viewed === 0) {
-        document.getElementById("section-title").textContent = "Tu persistes... tu es différent.";
-        document.getElementById("section-title").classList.add('text-transform');
-        
-        document.getElementById("hero-title").innerHTML = 'Mode <span style="color: var(--accent);">Spectre</span> Activé';
-        document.getElementById("hero-subtitle").textContent = "Accès dimensionnel ouvert";
-        
-        document.getElementById("section-title").style.background = "linear-gradient(to right, var(--accent), var(--secondary))";
-        document.getElementById("section-title").style.webkitBackgroundClip = "text";
-        document.getElementById("section-title").style.webkitTextFillColor = "transparent";
-        
-        viewed = 1;
-      }
-    };
+    // ============== التنقل بين الصفحة الرئيسية ولوحة التحكم ==============
+    const mainContent = document.getElementById('main-content');
+    const dashboard = document.getElementById('dashboard');
+    const dashboardLink = document.getElementById('dashboard-link');
+    const footerDashboard = document.getElementById('footer-dashboard');
+    const homeLink = document.getElementById('home-link');
+    const backToHome = document.getElementById('back-to-home');
+    const logo = document.getElementById('logo');
     
-    // 3. مراقبة النسخ
-    document.addEventListener('copy', () => {
-      const msg = document.getElementById("watcher-msg");
-      msg.style.display = "block";
-      setTimeout(() => msg.style.display = "none", 3000);
+    // الانتقال إلى لوحة التحكم
+    dashboardLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainContent.style.display = 'none';
+      dashboard.style.display = 'block';
+      dashboardLink.classList.add('active');
+      homeLink.classList.remove('active');
     });
     
-    // 4. ظهور الفيديو بعد تأخير
-    setTimeout(() => {
-      document.getElementById("videoBox").style.display = "block";
-    }, 20000); // 20 ثانية
+    footerDashboard.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainContent.style.display = 'none';
+      dashboard.style.display = 'block';
+      dashboardLink.classList.add('active');
+      homeLink.classList.remove('active');
+    });
     
-    // 5. زر الوضع الغريب (03:33 صباحاً)
+    // العودة إلى الصفحة الرئيسية
+    backToHome.addEventListener('click', function() {
+      mainContent.style.display = 'block';
+      dashboard.style.display = 'none';
+      homeLink.classList.add('active');
+      dashboardLink.classList.remove('active');
+    });
+    
+    homeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainContent.style.display = 'block';
+      dashboard.style.display = 'none';
+      homeLink.classList.add('active');
+      dashboardLink.classList.remove('active');
+    });
+    
+    logo.addEventListener('click', function() {
+      mainContent.style.display = 'block';
+      dashboard.style.display = 'none';
+      homeLink.classList.add('active');
+      dashboardLink.classList.remove('active');
+    });
+    
+    // ============== زر الوضع المتقدم ==============
     const now = new Date();
+    const alienBtn = document.getElementById('alienBtn');
+    
     if (now.getHours() === 3 && now.getMinutes() === 33) {
-      document.getElementById("alienBtn").style.display = "block";
+      alienBtn.style.display = "block";
     }
     
-    // تفعيل الوضع الغريب عند النقر
-    document.getElementById("alienBtn").addEventListener('click', function() {
-      document.body.classList.add('spectre-mode');
-      document.getElementById("hero-title").innerHTML = 'MODE <span style="color: var(--accent);">SPECTRE</span> ACTIVÉ';
-      document.getElementById("hero-subtitle").textContent = "Accès dimensionnel ouvert";
-      
-      // تغيير لون شريط العنوان
-      document.getElementById("section-title").style.background = "linear-gradient(to right, var(--accent), var(--secondary))";
-      document.getElementById("section-title").style.webkitBackgroundClip = "text";
-      document.getElementById("section-title").style.webkitTextFillColor = "transparent";
-      
-      // تغيير لون زر الشراء
-      document.getElementById("buyBtn").style.background = "linear-gradient(to right, var(--secondary), var(--accent))";
-      
-      // إخفاء زر الوضع الغريب بعد التفعيل
+    alienBtn.addEventListener('click', function() {
+      document.getElementById("hero-title").innerHTML = 'MODE <span style="color: var(--accent);">EXPERT</span> ACTIVÉ';
+      document.getElementById("hero-subtitle").textContent = "Accès aux fonctionnalités avancées débloqué";
       this.style.display = "none";
+      
+      // إظهار إشعار
+      alert("Mode Expert activé avec succès ! Accès aux fonctionnalités avancées autorisé.");
     });
     
-    // 6. تفعيل الجسيمات عند التحميل
-    document.addEventListener('DOMContentLoaded', createParticles);
-    
-    // ============== إصلاحات الوظائف ==============
-    
-    // 7. جعل البطاقات قابلة للنقر
-    document.querySelectorAll('.component-card').forEach(card => {
-      card.addEventListener('click', function() {
-        const target = this.getAttribute('data-target');
-        document.getElementById(`${target}Modal`).style.display = 'flex';
-        
-        // تسجيل الاهتمام
-        showConfirmation(`Intérêt enregistré pour ${this.querySelector('.component-title').textContent}`);
-      });
-    });
-    
-    // 8. إغلاق النوافذ المنبثقة
-    document.getElementById('closeGuide').addEventListener('click', () => {
-      document.getElementById('guideModal').style.display = 'none';
-    });
-    
-    document.getElementById('closeNotion').addEventListener('click', () => {
-      document.getElementById('notionModal').style.display = 'none';
-    });
-    
-    // 9. زر الشراء إلى Gumroad
+    // ============== زر الشراء ==============
     document.getElementById('buyBtn').addEventListener('click', () => {
       window.open('https://yacinet4.gumroad.com/l/phantom-engine-v1', '_blank');
     });
     
-    // 10. إظهار رسالة التأكيد
-    function showConfirmation(message) {
-      const confirmation = document.getElementById('confirmation');
-      confirmation.textContent = message;
-      confirmation.style.display = 'block';
-      
-      setTimeout(() => {
-        confirmation.style.display = 'none';
-      }, 3000);
-    }
-    
-    // 11. إغلاق النوافذ عند النقر خارجها
-    window.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal')) {
-        e.target.style.display = 'none';
-      }
-    });
+    // ============== تفعيل الجسيمات عند التحميل ==============
+    document.addEventListener('DOMContentLoaded', createParticles);
   </script>
 </body>
 </html>
